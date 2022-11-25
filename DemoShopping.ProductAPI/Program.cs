@@ -1,6 +1,7 @@
 using AutoMapper;
 using DemoShopping.ProductAPI.Config;
 using DemoShopping.ProductAPI.Data.Context;
+using DemoShopping.ProductAPI.Data.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddDbContextPool<MyApplicationContext>(options => options.UseMy
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 
